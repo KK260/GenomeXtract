@@ -2,9 +2,9 @@
 Automatically download, compare, and assemble genomes from NCBI
 
 
-### - findGenome.py
+### - findGenome.py (version 5
 
-This script will automatically download and filter genomes from the NCBI database.
+This script will automatically download and filter organellar and nuclear genomes from the NCBI database.
 
 ```
 # basic code:
