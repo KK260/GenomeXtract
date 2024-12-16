@@ -4,7 +4,7 @@ Automatically download, compare, and assemble genomes from NCBI
 
 ### - findGenome.py (version 5)
 
-## **Dependencies**
+**Dependencies**
 This script requires Python 3.6+ and the following libraries:
 pip install biopython
 
