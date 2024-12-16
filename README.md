@@ -50,6 +50,7 @@ options:
 ### - assembleGenome.py
 
 **Dependencies**
+This script requires Java 1.6 or later (for Astral).
 This script requires Python 3.6+ and the following libraries:
 pip install biopython
 
