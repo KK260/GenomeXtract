@@ -104,11 +104,11 @@ options:
 python assembleGenes.py -i INPUT -s FEATURE_SUMMARY -g --group_order GROUP_ORDER -s -a -r --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
 
 # example:
-For a small test datasets, run: python findGenome.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
-python assembleGenes.py -i chloroplast_ranunculus/*.gb -f ranunculus_features -s -a -r --output_dir chloroplast_ranunculus/
+For a small test datasets, run: python findGenome5.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email kevin.karbstein@uni-goettingen.de
+python assembleGenes.py -i chloroplast_ranunculus/*.gb -o ranunculus_gene_features -s -g -a -r -x 
 
-For a small test datasets, run: python findGenome.py -g "ranunculales“ -o ./mitogenome_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
-python assembleGenes.py -i mitogenome_ranunculales/*.gb -f ranunculales_features --group_feature_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -a -r --output_dir mitogenome_ranunculales/
+For a small test datasets, run: python findGenome5.py -g "ranunculales" -o ./mitogenome_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email kevin.karbstein@uni-goettingen.de
+python assembleGenes.py -i mitogenome_ranunculales/*.gb -o ranunculales_gene_features —feeature_section_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -g -a -r -x
 
 # usage:
 assembleGenes.py [-h] --input INPUT [FILE1.gb FILE2.gb ...] [-o GROUP_ORDER [GROUP1 GROUP2 ...]] [--feature_section_summary]
