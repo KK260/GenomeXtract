@@ -111,11 +111,10 @@ For a small test datasets, run: python findGenome.py -g "ranunculales“ -o ./mi
 python assembleGenes.py -i mitogenome_ranunculales/*.gb -f ranunculales_features --group_feature_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -a -r --output_dir mitogenome_ranunculales/
 
 # usage:
-assembleGenes.py [-h] --input INPUT [FILE1.gb FILE2.gb ...] [--feature_section_summary]
+assembleGenes.py [-h] --input INPUT [FILE1.gb FILE2.gb ...] [-o GROUP_ORDER [GROUP1 GROUP2 ...]] [--feature_section_summary]
                        [--generate_gene_sequences] [--align_sequences] [--run_raxml] [--run_astral]
                        [--output_dir OUTPUT_DIR]
                        [--select_group SELECT_GROUP]
-                       [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
                        [--overwrite]
 
 Process GenBank files and extract gene names and sequences.
@@ -125,6 +124,8 @@ options:
   -i, --input INPUT     Path to the GenBank files
   -f, --feature_section_summary
                         Generate section-wise feature summary
+  --group_order GROUP_ORDER [GROUP_ORDER ...]
+                        Limit gene extraction to a specific group
   -g, --generate_gene_sequences
                         Generate gene sequences in FASTA format
   -a, --align_sequences
@@ -132,8 +133,6 @@ options:
   -r, --run_raxml       Run RAxML-NG for phylogenetic analysis
   -o, --output_dir OUTPUT_DIR
                         Output directory for gene sequences and alignment results
-  --group_order GROUP_ORDER [GROUP_ORDER ...]
-                        Limit gene extraction to a specific group
   --overwrite           Overwrite existing files if they exist
 ```
 
