@@ -60,14 +60,18 @@ pip install biopython
 python assembleGenome.py -i INPUT -f FEATURE_SUMMARY -g --group_order GROUP_ORDER -s -a -r -t --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
 
 # example:
-python assembleGenome.py -i ./plastomes_ranunculus/*.gb -f mitogenome_features -g -o Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -a -r -t --output_dir ./phylogenies_ranunclaceae --overwrite
+For a small test datasets, run: python findGenome5.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python assembleGenome4.py -i chloroplast_ranunculus/*.gb -f ranunculus_features -s -a -r -t --output_dir chloroplast_ranunculus/
+
+For a small test datasets, run: python findGenome5.py -g "ranunculales“ -o ./mitogenome_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python assembleGenome4.py -i mitogenome_ranunculales/*.gb -f ranunculales_features --group_feature_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -a -r -t --output_dir mitogenome_ranunculales/
 
 # usage:
 assembleGenome.py [-h] -i INPUT [FILE1.gb FILE2.gb ...] [-f FEATURE_SUMMARY] [-g] [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
-                         [-s] [-a] [-r] [-t]
-                         [--output_dir OUTPUT_DIR]
-                         [--select_group SELECT_GROUP]
-                         [--overwrite]
+                       [--generate_gene_sequences] [--align_sequences] [--run_raxml] [--run_astral]
+                       [--output_dir OUTPUT_DIR]
+                       [--select_group SELECT_GROUP]
+                       [--overwrite]
 
 Process GenBank files and extract gene names and sequences.
 
@@ -95,4 +99,4 @@ options:
 ```
 
 ### If you use any of the scripts, please cite the following reference until the journal article is published: 
-Karbstein et al. (2023), BioRxiv (https://doi.org/10.1101/2023.08.08.552429)
+Karbstein et al. (2024), BioRxiv (https://doi.org/10.1101/2023.08.08.552429)
