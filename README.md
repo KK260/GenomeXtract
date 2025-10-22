@@ -1,4 +1,4 @@
-# Tools-For-Finding-Comparing-Assembling-NCBI-Genomes
+# Tools for Finding, Comparing, and Assembling NCBI-Genomes
 Automatically download, compare, and assemble genomes from NCBI
 
 
