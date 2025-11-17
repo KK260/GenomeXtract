@@ -319,8 +319,8 @@ def main():
         if args.genome_type == "nuclear_genome":
             find_nuclear_genomes(
                 group=args.group,
-                annotated=args.annotated
-                assembly_level=args.level
+                annotated=args.annotated,
+                assembly_level=args.level,
                 outfolder=args.outfolder,
                 genome_type=args.genome_type
             )
