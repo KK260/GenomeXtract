@@ -20,9 +20,9 @@ python findGenome.py "group" "outfolder" --genome_type "chloroplast" --length_th
 # examples:
 python findGenome.py -g "ranunculaceae" -o ./genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
 
-python findGenome.py -g "ranunculaceae" -o ./chloroplast_ranunculaceae --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python findGenome.py -g "ranunculaceae" -o ./chloroplast_ranunculaceae --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
-python findGenome.py -g "ranunculaceae" -o ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python findGenome.py -g "ranunculaceae" -o ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
 # usage:
 findGenome.py [-h] [--outfolfder OUTFOLDER] [--group GROUP]
