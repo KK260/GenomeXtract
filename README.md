@@ -15,14 +15,14 @@ conda install -c bioconda ncbi-datasets-cli
 
 ```
 # basic code:
-python findGenome.py "group" "outfolder" --genome_type "chloroplast" --length_threshold INT --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
+python findGenome.py --group "group" --outfolder "outfolder" --genome_type "chloroplast" --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
 
 # examples:
-python findGenome.py -g "ranunculaceae" -o ./genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
+python findGenome.py --group "ranunculaceae" --outfolder ./genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
 
-python findGenome.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
+python findGenome.py --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
-python findGenome.py -g "ranunculaceae" -o ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
+python findGenome.py --group "ranunculaceae" --outfolder ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
 # usage:
 findGenome.py [-h] [--outfolfder OUTFOLDER]
@@ -48,6 +48,50 @@ options:
   --batch_size          Batch size for downloading genomes (INT; only organellar genomes).
   --duplicate_removal   Remove duplicate sequence files (only for organellar genomes). Prioritize NC_* or the latest release(s).
   --max_individuals     Maximum number of individuals per species to retain (INT; only organellar genomes). Prioritize NC_* the latest release(s).
+  --overwrite           Overwrite existing output folder.
+  --email               Your email for NCBI Entrez queries.
+```
+
+### - findClosestGenome.py
+
+**Dependencies**
+This script requires Python 3.6+ and the following libraries:
+pip install biopython
+
+Install the NCBI Datasets CLI for handling nuclear genomes:
+conda install -c bioconda ncbi-datasets-cli
+
+**This script will automatically download and filter organellar and nuclear genomes from the NCBI database**
+
+```
+# basic code:
+python findClosestGenome.py --taxon "species/taxon" "outfolder" --genome_type "chloroplast" --overwrite
+
+# examples:
+python findClosestGenome.py --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
+
+python findClosestGenome.py --taxon "ranunculus" --outfolder ./closest_chloroplast_ranunculus --genome_type "chloroplast" --overwrite --email XXX@XXX
+
+python findClosestGenome.py --taxon "ranunculus" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "mitochondrial" --overwrite --email XXX@XXX
+
+# usage:
+findGenome.py [-h] [--outfolfder OUTFOLDER]
+                   [--taxon SPECIES]
+                   [--genome_type {chloroplast,mitochondrial,nuclear_genome}]
+                   [--annotated]
+                   [--assembly_level {scaffold, chromosome}]
+                   [--overwrite]
+                   [--email EMAIL]
+
+Find the closest available reference genomes(s) of a given taxon in NCBI.
+
+options:
+  -h, --help            Show this help message and exit
+  -o, --outfolder       Output folder for the result file (STRING).
+  -g, --taxon           Species or higher-level taxon name (e.g., Genus or Family).
+  -t, --genome_type     The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
+  --annotated           Select only gene-annotated nuclear genomes.
+  --assembly_level      Choose the assmbly level of the nuclear genome (STRING; scaffold, chromosome).
   --overwrite           Overwrite existing output folder.
   --email               Your email for NCBI Entrez queries.
 ```
