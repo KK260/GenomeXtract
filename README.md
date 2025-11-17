@@ -28,6 +28,8 @@ python findGenome.py -g "ranunculaceae" -o ./mitogenome_ranunculaceae --genome_t
 findGenome.py [-h] [--outfolfder OUTFOLDER]
                    [--group GROUP]
                    [--genome_type {chloroplast,mitochondrial,nuclear_genome}]
+                   [--annotated]
+                   [--assembly_level {scaffold, chromosome}]
                    [--batch_size BATCH_SIZE]
                    [--duplicate_removal]
                    [--max_individuals MAX_INDIVIDUALS_PER_SPECIES]
@@ -41,6 +43,8 @@ options:
   -o, --outfolder       Output folder for downloaded files (STRING).
   -g, --group           Taxonomic group or organism name (STRING; e.g., the name of the genus, family, order).
   -t, --genome_type     The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
+  --annotated           Select only gene-annotated nuclear genomes.
+  --assembly_level      Choose the assmbly level of the nuclear genome (STRING; scaffold, chromosome).
   --batch_size          Batch size for downloading genomes (INT; only organellar genomes).
   --duplicate_removal   Remove duplicate sequence files (only for organellar genomes). Prioritize NC_* or the latest release(s).
   --max_individuals     Maximum number of individuals per species to retain (INT; only organellar genomes). Prioritize NC_* the latest release(s).
