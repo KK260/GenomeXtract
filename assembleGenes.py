@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This script finds all available plastomes, mitogenomes, and nuclear genomes from a given group (e.g., genus, family, or order) in public databases. 
+This script assembles organellar genes from a given group (e.g., genus, family, or order) derived from the NCBI database.
 
 License:
     Copyright 2025 Kevin Karbstein
