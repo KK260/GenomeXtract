@@ -40,7 +40,7 @@ options:
                         The type of genome to download.
   --batch_size BATCH_SIZE
                         Batch size for downloading genomes (only organellar genomes).
-  --duplicate_removal   Remove duplicate sequence files (only for organellar genomes).
+  --duplicate_removal   Remove duplicate sequence files (only for organellar genomes). Prioritize NC_* or the latest release.
   --max_individuals MAX_INDIVIDUALS_PER_SPECIES
                         Maximum number of individuals per species to retain (only organellar genomes).
   --overwrite           Overwrite existing output folder.
