@@ -4,7 +4,7 @@
 This script finds all available plastomes, mitogenomes, and nuclear genomes from a given group (e.g., genus, family, or order) in public databases. 
 
 License:
-    Copyright 2024 Kevin Karbstein and Lara Kösters
+    Copyright 2025 Kevin Karbstein
     This script is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -297,7 +297,7 @@ def main():
     parser.add_argument('-o', '--outfolder', required=True, help="Output folder for downloaded files.")
     parser.add_argument('-t', '--genome_type', required=True, choices=['chloroplast', 'mitochondrial', 'nuclear_genome'], help="Type of genome to process.")
     parser.add_argument("--batch_size", type=int, default=50, help="Batch size for downloading.")
-    parser.add_argument('--duplicate_removal', action='store_true', help="Remove duplicate files.")
+    parser.add_argument('--duplicate_removal', action='store_true', help="Remove duplicate files. Prioritize NC_* or the latest release.")
     parser.add_argument('--max_individuals', type=int, help="Maximum individuals per species.")
     parser.add_argument('--overwrite', action='store_true', help="Overwrite existing output folder.")
     parser.add_argument('--email', required=True, help="Your email for NCBI Entrez queries.")
