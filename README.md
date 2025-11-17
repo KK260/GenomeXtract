@@ -47,7 +47,7 @@ options:
   --email               Your email for NCBI Entrez queries.
 ```
 
-### - assembleGenome.py / assembleGenes.py (version 5)
+### - assembleGenome.py / assembleGenes.py
 
 **Dependencies**
 This script requires Java 1.6 or later (for Astral).
