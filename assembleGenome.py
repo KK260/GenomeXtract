@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 """
-This script automatically extracts and compares features, and aligns and assembles annotated CDS regions from sequence files downloaded from NCBI.
+This script finds all available plastomes, mitogenomes, and nuclear genomes from a given group (e.g., genus, family, or order) in public databases. 
 
 License:
-    Copyright 2024 Kevin Karbstein
+    Copyright 2025 Kevin Karbstein
     This script is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -14,7 +14,8 @@ License:
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU General Public License for more details.
     You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 """
 
 import argparse
