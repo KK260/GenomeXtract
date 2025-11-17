@@ -202,13 +202,13 @@ def find_full_organelle_genome(group, outfolder, genome_type, duplicate_removal,
         raise
 
 
-def preview_nuclear_genome_size(group):
+def preview_nuclear_genome_size(group, assembly_level):
     """Preview the nuclear genome dataset size using the NCBI Datasets API."""
     try:
         command = f"""
         source ~/.zshrc &&
         conda activate ncbi_datasets &&
-        datasets download genome taxon "{group}" --preview --include genome --annotated --assembly-level "chromosome" --assembly-version latest --exclude-atypical &&
+        datasets download genome taxon "{group}" --preview --include genome --annotated --assembly-level "{assembly_level}" --assembly-version latest --exclude-atypical &&
         conda deactivate
         """
         logging.info(f"Running preview command: {command.strip()}")
@@ -236,7 +236,7 @@ def find_nuclear_genomes(group, outfolder, genome_type, annotated, assembly_leve
         logging.info(f"Handling 'nuclear' genome type for group '{group}'.")
 
         # Preview genome size
-        estimated_size_gb = preview_nuclear_genome_size(group=group)
+        estimated_size_gb = preview_nuclear_genome_size(group=group, assembly_level=assembly_level)
         if estimated_size_gb:
             logging.info(f"Estimated size of the single (compressed) nuclear genome fasta file: {estimated_size_gb:.2f} GB")
             #user_input = input(f"Do you want to proceed? Estimated size: {estimated_size_gb:.2f} GB (yes/no): ").strip().lower()
@@ -300,7 +300,7 @@ def main():
     parser.add_argument('-o', '--outfolder', required=True, help="Output folder for downloaded files.")
     parser.add_argument('-t', '--genome_type', required=True, choices=['chloroplast', 'mitochondrial', 'nuclear_genome'], help="Type of genome to process.")
     parser.add_argument('--annotated', action='store_true', help="Select only annotated nuclear genomes.")
-    parser.add_argument('--assembly_level', required=True, choices=['contig', 'scaffold', 'chromosome', 'complete'], help="Choose the assmbly level of the nuclear genome.")
+    parser.add_argument('--assembly_level', required=True, choices=['scaffold', 'chromosome'], help="Choose the assmbly level of the nuclear genome.")
     parser.add_argument("--batch_size", type=int, default=50, help="Batch size for downloading.")
     parser.add_argument('--duplicate_removal', action='store_true', help="Remove duplicate files. Prioritize NC_* or the latest release.")
     parser.add_argument('--max_individuals', type=int, help="Maximum individuals per species.")
