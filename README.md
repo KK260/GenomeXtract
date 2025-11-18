@@ -6,9 +6,11 @@ Automatically download, compare, and assemble genomes from NCBI
 
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:
+
 pip install biopython
 
 Install the NCBI Datasets CLI for handling nuclear genomes:
+
 conda install -c bioconda ncbi-datasets-cli
 
 **This script will automatically download and filter organellar and nuclear genomes from the NCBI database**
@@ -32,7 +34,7 @@ findGenome.py [-h] [--outfolfder OUTFOLDER]
                    [--assembly_level {scaffold, chromosome}]
                    [--batch_size BATCH_SIZE]
                    [--duplicate_removal]
-                   [--max_individuals MAX_INDIVIDUALS_PER_SPECIES]
+                   [--max_individuals MAX_INDIVIDUALS]
                    [--overwrite]
                    [--email EMAIL]
 
@@ -40,25 +42,27 @@ Download plastid, mitochondrial, or nuclear genomes from NCBI.
 
 options:
   -h, --help            Show this help message and exit
-  -o, --outfolder       Output folder for downloaded files (STRING).
-  -g, --group           Taxonomic group or organism name (STRING; e.g., the name of the genus, family, order).
-  -t, --genome_type     The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
+  --outfolder           Output folder for downloaded files (STRING).
+  --group               Taxonomic group or organism name (STRING; e.g., the name of the genus, family, order).
+  --genome_type         The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
   --annotated           Select only gene-annotated nuclear genomes.
   --assembly_level      Choose the assmbly level of the nuclear genome (STRING; scaffold, chromosome).
   --batch_size          Batch size for downloading genomes (INT; only organellar genomes).
   --duplicate_removal   Remove duplicate sequence files (only for organellar genomes). Prioritize NC_* or the latest release(s).
   --max_individuals     Maximum number of individuals per species to retain (INT; only organellar genomes). Prioritize NC_* the latest release(s).
   --overwrite           Overwrite existing output folder.
-  --email               Your email for NCBI Entrez queries.
+  --email               Your email for NCBI Entrez queries (STRING).
 ```
 
 ### - findClosestGenome.py
 
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:
+
 pip install biopython
 
 Install the NCBI Datasets CLI for handling nuclear genomes:
+
 conda install -c bioconda ncbi-datasets-cli
 
 **This script will automatically download and filter organellar and nuclear genomes from the NCBI database**
@@ -87,23 +91,27 @@ Find the closest available reference genomes(s) of a given taxon in NCBI.
 
 options:
   -h, --help            Show this help message and exit
-  -o, --outfolder       Output folder for the result file (STRING).
-  -g, --taxon           Species or higher-level taxon name (e.g., Genus or Family).
-  -t, --genome_type     The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
+  --outfolder           Output folder for the result file (STRING).
+  --taxon               Species or higher-level taxon name (STRING; e.g., Genus or Family).
+  --genome_type         The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
   --annotated           Select only gene-annotated nuclear genomes.
   --assembly_level      Choose the assmbly level of the nuclear genome (STRING; scaffold, chromosome).
   --overwrite           Overwrite existing output folder.
-  --email               Your email for NCBI Entrez queries.
+  --email               Your email for NCBI Entrez queries (STRING).
 ```
 
 ### - assembleGenome.py / assembleGenes.py
 
 **Dependencies**
 This script requires Java 1.6 or later (for Astral).
+
 This script requires Python 3.6+ and the following libraries:
 pip install biopython
+
 Install RAxML_NG/iqtree for phylogenetic tree inference:
+
 conda install bioconda::raxml-ng # v1.2.2
+
 conda install bioconda::iqtree # v3.0.1
 
 **These scripts automatically extract and compare features, and align and assemble sequences/annotated CDS regions from files downloaded from NCBI**
@@ -117,14 +125,16 @@ For a small test datasets, run: python findGenome.py -g "ranunculus" -o ./chloro
 python assembleGenome.py -i chloroplast_ranunculus/*.gb -f ranunculus_features -s -a -r --output_dir chloroplast_ranunculus/
 
 # usage:
-assembleGenome.py [-h] --input INPUT [FILE1.gb FILE2.gb ...]
-                       [-f FEATURE_SUMMARY]
-                       [-g]
-                       [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
+assembleGenome.py [-h] [--input INPUT [FILE1.gb FILE2.gb ...]
+                       [--feature_summary FEATURE_SUMMARY]
+                       [--group_feature_summary]
+                       [--group_order GROUP_ORDER [GROUP1 GROUP2 ...]]
                        [--generate_gene_sequences]
                        [--align_sequences]
                        [--run_raxml]
-                       [--run_astral]
+                       [--raxml_model RAXML_MODEL]
+                       [--bootstrap_replicates BOOTSTRAP_REPLICATES]
+                       [--run_iqtree]
                        [--output_dir OUTPUT_DIR]
                        [--select_group SELECT_GROUP]
                        [--overwrite]
@@ -132,24 +142,20 @@ assembleGenome.py [-h] --input INPUT [FILE1.gb FILE2.gb ...]
 Process GenBank files and extract gene names and sequences.
 
 options:
-  -h, --help            show this help message and exit
-  -i, --input INPUT     Path to the GenBank files
-  -f, --feature_summary FEATURE_SUMMARY
-                        Path for feature summary files (CSV and XLSX)
-  -g, --group_feature_summary
-                        Whether to generate a section-wise feature summary
-  -o, --group_order GROUP_ORDER [GROUP_ORDER ...]
-                        Optional: Order of sections in the summary files
-  -s, --generate_gene_sequences
-                        Generate gene sequences in FASTA format
-  -a, --align_sequences
-                        Align gene sequences using MAFFT
-  -r, --run_raxml       Run RAxML-NG for phylogenetic analysis
-  --select_group SELECT_GROUP
-                        Limit gene extraction to a specific group
-  --output_dir OUTPUT_DIR
-                        Output directory for gene sequences and alignment results
-  --overwrite           Overwrite existing files if they exist
+  -h, --help                show this help message and exit
+  --input INPUT             Path to the GenBank files (STRING)
+  --feature_summary         Folder name for feature summary files (STRING)                  
+  --group_feature_summary   Whether to generate a section-wise feature summary               
+  --group_order             Order of sections in the summary files (STRING)          
+  --generate_gene_sequences Generate gene sequences in FASTA format       
+  --align_sequences         Align gene sequences using MAFFT
+  --run_raxml               Run RAxML-NG for phylogenetic analysis
+  --raxml_model             RAxML-NG model to use (STRING; default: GTR+G)
+  --bootstrap_replicates    Number of bootstrap replicates for RAxML-NG (default: 100)
+  --run_iqtree              Run IQ-TREE for phylogenetic analysis
+  --select_group            Limit gene extraction to a specific group (STRING)  
+  --output_dir              Output directory for gene sequences and alignment results (STRING)
+  --overwrite               Overwrite existing files if they exist
 ```
 
 
