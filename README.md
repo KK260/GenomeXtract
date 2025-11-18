@@ -1,4 +1,4 @@
-# Felix – A Toolkit to Easily Find, Compare, and Assemble NCBI Genomes
+# GenomeXtract – A Toolkit to Easily Find, Compare, and Assemble NCBI Genomes
 Automatically download, compare, and assemble genomes (or genes) from NCBI – saving you time and keeping genomics fun.
 
 **Dependencies**
