@@ -1,41 +1,42 @@
 package:
-  name: genomextract
+  name: GenomeXtract
   version: "0.1.0"
 
 source:
-  path: ..
+  git_url: https://github.com/KK260/NCBI-Genome-Tools.git
+  git_tag: "v0.1.0"   # match your release tag
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install ."
+  script: bash build.sh
 
 requirements:
   host:
-    - python =3.10
+    - python >=3.10
     - pip
-    - biopython
-    - pandas
-    - requests
-    - openpyxl
-
   run:
-    - python =3.10
+    - python >=3.10
     - biopython
     - pandas
     - requests
     - openpyxl
+    - ncbi-datasets-cli ==18.9.0
+    - raxml-ng ==1.2.2
+    - iqtree ==3.0.1
+    - mafft ==7.525
+    - astral-tree ==5.7.8
 
-    # External tools from bioconda
-    - ncbi-datasets-cli ==18.9.0    # 18.9.0
-    - raxml-ng ==1.2.2              # v1.2.2
-    - iqtree ==3.0.1                # v3.0.1
-    - mafft ==7.525                 # v7.525
-    - astral-tree ==5.7.8           # v5.7.8
+test:
+  commands:
+    - findGenome --help
+    - findClosestGenome --help
+    - assembleOrgGenome --help
+    - assembleOrgGenes --help
 
 about:
   home: "https://github.com/KK260/NCBI-Genome-Tools"
-  summary: "A toolkit for downloading, assembling, and analyzing NCBI genomes."
   license: MIT
+  summary: "A toolkit for downloading, assembling, and analyzing NCBI genomes."
 
 extra:
   recipe-maintainers:
