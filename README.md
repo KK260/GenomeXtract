@@ -102,8 +102,9 @@ options:
 This script requires Java 1.6 or later (for Astral).
 This script requires Python 3.6+ and the following libraries:
 pip install biopython
-Install RAxML_NG for phylogenetic tree inference:
+Install RAxML_NG/iqtree for phylogenetic tree inference:
 conda install bioconda::raxml-ng # v1.2.2
+conda install bioconda::iqtree # v3.0.1
 
 **These scripts automatically extract and compare features, and align and assemble sequences/annotated CDS regions from files downloaded from NCBI**
 
