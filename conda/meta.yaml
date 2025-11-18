@@ -34,7 +34,7 @@ requirements:
 
 about:
   home: "https://github.com/KK260/NCBI-Genome-Tools"
-  summary: "Utilities for downloading, assembling, and analyzing NCBI genomes."
+  summary: "A toolkit for downloading, assembling, and analyzing NCBI genomes."
   license: MIT
 
 extra:
