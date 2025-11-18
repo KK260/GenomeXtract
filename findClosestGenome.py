@@ -92,9 +92,8 @@ def run_datasets_summary_nuclear(taxid, include_lineage=False):
 
 
     cmd = (
-        f'source ~/.zshrc && conda activate ncbi_datasets && '
         f'datasets summary genome taxon {taxid} '
-        f'--assembly-version latest --exclude-atypical --as-json-lines && conda deactivate'
+        f'--assembly-version latest --exclude-atypical --as-json-lines'
     )
 
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)

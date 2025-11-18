@@ -207,10 +207,7 @@ def preview_nuclear_genome_size(group, assembly_level):
     """Preview the nuclear genome dataset size using the NCBI Datasets API."""
     try:
         command = f"""
-        source ~/.zshrc &&
-        conda activate ncbi_datasets &&
-        datasets download genome taxon "{group}" --preview --include genome --annotated --assembly-level "{assembly_level}" --assembly-version latest --exclude-atypical &&
-        conda deactivate
+        datasets download genome taxon "{group}" --preview --include genome --annotated --assembly-level "{assembly_level}" --assembly-version latest --exclude-atypical
         """
         logging.info(f"Running preview command: {command.strip()}")
         result = subprocess.run(command, shell=True, executable='/bin/bash', stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -254,10 +251,7 @@ def find_nuclear_genomes(group, outfolder, genome_type, annotated, assembly_leve
 
         zip_filename = os.path.join(outfolder, f"{group}_nuclear_genome.zip")
         command = f"""
-        source ~/.zshrc &&
-        conda activate ncbi_datasets &&
-        datasets download genome taxon "{group}" --include genome,gbff {annotated_arg} --assembly-level "{assembly_level}" --assembly-version latest --exclude-atypical --filename {zip_filename} &&
-        conda deactivate
+        datasets download genome taxon "{group}" --include genome,gbff {annotated_arg} --assembly-level "{assembly_level}" --assembly-version latest --exclude-atypical --filename {zip_filename}
         """
 
         try:
