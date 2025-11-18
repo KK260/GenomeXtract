@@ -1,15 +1,15 @@
 from setuptools import setup
 
 setup(
-    name="ncbi-genome-tools",
+    name="GenomeXtract",
     version="0.1.0",
-    packages=["felix"],
+    packages=["genomextract"],
     entry_points={
         "console_scripts": [
-            "findGenome = felix.findGenome:main",
-            "findClosestGenome = felix.findClosestGenome:main",
-            "assembleGenome = felix.assembleGenome:main",
-            "assembleGenes = felix.assembleGenes:main",
+            "findGenome = genomextract.findGenome:main",
+            "findClosestGenome = genomextract.findClosestGenome:main",
+            "assembleGenome = genomextract.assembleGenome:main",
+            "assembleGenes = genomextract.assembleGenes:main",
         ]
     },
 )
