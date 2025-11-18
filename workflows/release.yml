@@ -1,0 +1,68 @@
+name: Release Conda Package
+
+on:
+  # Trigger on new tags (semantic versioning recommended, e.g., v0.1.0)
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Install micromamba for Conda management
+      - name: Install micromamba
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          micromamba-version: latest
+
+      # Create environment from environment.yml
+      - name: Create Conda environment
+        shell: bash -l {0}
+        run: |
+          micromamba create -y -n genomextract -f environment.yml
+          micromamba activate genomextract
+
+      # Install your package
+      - name: Install package
+        shell: bash -l {0}
+        run: |
+          micromamba activate genomextract
+          python -m pip install .
+
+      # Run CLI tests
+      - name: Test CLI tools
+        shell: bash -l {0}
+        run: |
+          micromamba activate genomextract
+          findGenome --help
+          findClosestGenome --help
+          assembleOrgGenome --help
+          assembleOrgGenes --help
+
+      # Run pytest
+      - name: Run unit tests
+        shell: bash -l {0}
+        run: |
+          micromamba activate genomextract
+          pytest -q
+
+      # Build Conda package
+      - name: Build Conda package
+        shell: bash -l {0}
+        run: |
+          micromamba activate genomextract
+          conda-build conda --output-folder build_output
+
+      # Upload to Anaconda Cloud
+      - name: Upload to Anaconda Cloud
+        shell: bash -l {0}
+        env:
+          ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
+        run: |
+          micromamba activate genomextract
+          PACKAGE_PATH=$(ls build_output/linux-64/genomextract-*.tar.bz2)
+          anaconda upload $PACKAGE_PATH --user KK260 --label main --force
