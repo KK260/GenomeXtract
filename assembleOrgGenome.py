@@ -197,7 +197,7 @@ def run_raxml_ng(aligned_fasta_file, output_dir, overwrite, raxml_model="GTR+G",
         subprocess.run(raxml_cmd, shell=True)
         print(f"RAxML-NG analysis completed for {aligned_fasta_file}")
 
-def run_iqtree(aligned_fasta_file, output_dir, overwrite):
+def run_iqtree(aligned_fasta_file, output_dir, overwrite, bootstrap_replicates=100):
     """
     Run IQ-TREE for phylogenetic analysis on the aligned sequences.
     """
@@ -206,7 +206,7 @@ def run_iqtree(aligned_fasta_file, output_dir, overwrite):
 
     output_path = os.path.join(output_dir, "iqtree_output")
     if not os.path.exists(output_path) or overwrite:
-        iqtree_cmd = f"iqtree -p {aligned_fasta_file} -pre concat -T AUTO --tbe"
+        iqtree_cmd = f"iqtree -s {aligned_fasta_file} -pre concat -T AUTO -b {bootstrap_replicates} --tbe --prefix {output_path}"
         subprocess.run(iqtree_cmd, shell=True)
         print(f"IQ-TREE analysis completed for {aligned_fasta_file}")
 
@@ -214,13 +214,13 @@ def run_iqtree(aligned_fasta_file, output_dir, overwrite):
 
 def main():
     parser = argparse.ArgumentParser(description="Process GenBank files to extract gene information and perform phylogenetic analyses.")
-    parser.add_argument('-i', '--input', nargs='+', required=True, help='Path to the GenBank files')
-    parser.add_argument('-f', '--feature_summary', required=True, help='File name for feature summary CSV and XLSX files')
-    parser.add_argument('-g', '--group_feature_summary', action='store_true', help='Whether to generate a section-wise feature summary')
-    parser.add_argument('-o', '--group_order', nargs='+', help='Optional: Order of sections in the summary files')
-    parser.add_argument('-s', '--generate_gene_sequences', action='store_true', help='Generate gene sequences in FASTA format')
-    parser.add_argument('-a', '--align_sequences', action='store_true', help='Align gene sequences using MAFFT')
-    parser.add_argument('-r', '--run_raxml', action='store_true', help='Run RAxML-NG for phylogenetic analysis')
+    parser.add_argument('--input', nargs='+', required=True, help='Path to the GenBank files')
+    parser.add_argument('--feature_summary', required=True, help='File name for feature summary CSV and XLSX files')
+    parser.add_argument('--group_feature_summary', action='store_true', help='Whether to generate a section-wise feature summary')
+    parser.add_argument('--group_order', nargs='+', help='Optional: Order of sections in the summary files')
+    parser.add_argument('--generate_gene_sequences', action='store_true', help='Generate gene sequences in FASTA format')
+    parser.add_argument('--align_sequences', action='store_true', help='Align gene sequences using MAFFT')
+    parser.add_argument('--run_raxml', action='store_true', help='Run RAxML-NG for phylogenetic analysis')
     parser.add_argument('--raxml_model', default='GTR+G', help='RAxML-NG model to use (default: GTR+G)')
     parser.add_argument('--bootstrap_replicates', type=int, default=100, help='Number of bootstrap replicates for RAxML-NG (default: 100)')
     parser.add_argument('--run_iqtree', action='store_true', help='Run IQ-TREE for phylogenetic analysis')
@@ -250,7 +250,7 @@ def main():
         run_raxml_ng(aligned_fasta_file, args.output_dir, args.overwrite, args.raxml_model, args.bootstrap_replicates)
     # Run IQ-TREE if specified
     if args.run_iqtree:
-        run_iqtree(aligned_fasta_file, args.output_dir, args.overwrite, args.iqtree_model, args.bootstrap_replicates)
+        run_iqtree(aligned_fasta_file, args.output_dir, args.overwrite, args.bootstrap_replicates)
 
 
 if __name__ == "__main__":
