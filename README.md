@@ -4,7 +4,7 @@ Automatically download, compare, and assemble genomes (or genes) from NCBI – s
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:
 ```
-conda install python=3.10 
+conda install python>=3.6 
 
 pip install biopython
 pip install pandas
