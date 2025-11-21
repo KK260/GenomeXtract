@@ -29,7 +29,7 @@ __version__ = "0.0.0"
 exec(open("genomextract/version.py").read())
 
 setup(
-    name="captus",
+    name="genomextract",
     version=__version__,
     url="https://github.com/KK260/GenomeXtract",
     author="Kevin Karbstein",
